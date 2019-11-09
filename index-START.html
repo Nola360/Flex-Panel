@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Flex Panels 💪</title>
+  <link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+  <style>
+    html {
+      box-sizing: border-box;
+      background: #ffc600;
+      font-family: 'helvetica neue';
+      font-size: 20px;
+      font-weight: 200;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+      padding: 0;
+      margin: 0;
+    }
+
+    .panels {
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+
+    }
+
+    .panel {
+      background: #6B0F9C;
+      box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.1);
+      color: white;
+      text-align: center;
+      align-items: center;
+      /* Safari transitionend event.propertyName === flex */
+      /* Chrome + FF transitionend event.propertyName === flex-grow */
+      transition:
+        font-size 0.7s cubic-bezier(0.61, -0.19, 0.7, -0.11),
+        flex 0.7s cubic-bezier(0.61, -0.19, 0.7, -0.11),
+        background 0.2s;
+      font-size: 20px;
+      background-size: cover;
+      background-position: center;
+      flex: 1;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel1 {
+      background-image: url(https://images.complex.com/complex/image/upload/c_fill,g_center,w_1200/fl_lossy,pg_1/ncbwzaw44cjqvhnjxzjw.jpg);
+    }
+
+    .panel2 {
+      background-image: url(https://images-na.ssl-images-amazon.com/images/I/81Gsa8G18GL._SL1400_.jpg);
+    }
+
+    .panel3 {
+      background-image: url(https://images.genius.com/813dc62616d846f75e0fddd0bbbab326.902x917x1.png);
+    }
+
+    .panel4 {
+      background-image: url(https://ssla.ulximg.com/image/750x750/cover/1289635913_7020f4cadff88f233cbe9713e4dddea8.jpg/c6d8ba03273d4c7fb9768e5e27896793/1289635913_j-cole-friday-night-lights.jpg);
+    }
+
+    .panel5 {
+      background-image: url(https://images-na.ssl-images-amazon.com/images/I/51Zzc7PUDML.jpg);
+    }
+
+    /* Flex Children */
+    .panel>* {
+      margin: 0;
+      width: 100%;
+      transition: transform 0.5s;
+      /* border: 1px solid red; */
+      flex: 1 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Transitions text in and out */
+    .panel>*:first-child {
+      transform: translateY(-100%);
+    }
+
+    .panel.open-active>*:first-child {
+      transform: translateY(0);
+    }
+
+    .panel>*:last-child {
+      transform: translateY(100%);
+    }
+
+    .panel.open-active>*:last-child {
+      transform: translateY(0);
+    }
+
+    .panel p {
+      text-transform: uppercase;
+      font-family: 'Amatic SC', cursive;
+      text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
+      font-size: 2em;
+    }
+
+    .panel p:nth-child(2) {
+      font-size: 4em;
+    }
+
+    .panel.open {
+      font-size: 40px;
+      /* flex 5 will take 5x the amount of room */
+      flex: 5;
+    }
+
+    .title {
+      text-align: center;
+    }
+  </style>
+
+
+  <div class="title">
+    <h6>JavaScript 30: Day 5</h6>
+    <h5>My Top 5 Records of All Time</h5>
+  </div>
+
+  <div class="panels">
+    <div class="panel panel1">
+      <p>#1</p>
+      <p>JAY-Z</p>
+      <p style="background: black; color: white;">Reasonable Doubt</p>
+    </div>
+    <div class="panel panel2">
+      <p>#2</p>
+      <p>50 Cent</p>
+      <p style="background: black; color: white;">Get Rich Or Die Tryin'</p>
+    </div>
+    <div class="panel panel3">
+      <p>#3</p>
+      <p>Kanye West</p>
+      <p style="background: black; color: white;">College Dropout</p>
+    </div>
+    <div class="panel panel4">
+      <p>#4</p>
+      <p>J Cole</p>
+      <p style="background: black; color: white;">Friday Night Lights</p>
+    </div>
+    <div class="panel panel5">
+      <p>#5</p>
+      <p>Kendrick Lamar</p>
+      <p style="background: black; color: white;">Good Kid Maad City</p>
+    </div>
+  </div>
+
+  <script>
+    const panels = document.querySelectorAll('.panel');
+
+    // <!-- write a function that opens the panels -->
+    function toggleOpen() {
+      // console.log('Hello');
+      this.classList.toggle('open');
+    }
+
+    function toggleActive(e) {
+
+      // console.log(e.propertyName);
+      if (e.propertyName.includes('flex')) {
+        this.classList.toggle('open-active');
+      }
+    }
+    panels.forEach(panel => panel.addEventListener('click', toggleOpen))
+    panels.forEach(panel => panel.addEventListener('transitionend', toggleActive))
+  </script>
+
+
+
+</body>
+
+</html>
